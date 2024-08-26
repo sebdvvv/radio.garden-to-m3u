@@ -1,11 +1,40 @@
-# Radio.garden -> m3u
-A software that creates a m3u playlist from radio.garden public API data.
+<p align="center">
+  <img src="docs/assets/logo.png" alt="radio.garden_to_m3u logo" width="200"
+  style = "border-radius: 10%;"/>
+</p>
+
+<h1 align="center">Radio.garden to M3U</h1>
+
+<p align="center">
+  <strong>Generate an M3U playlist from radio.garden public API data</strong>
+</p>
+
+<p align="center">
+  <a href="#pre-requisites">Pre-requisites</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#license">License</a> •
+  <a href="#disclaimer">Disclaimer</a> •
+  <a href="#acknowledgements">Acknowledgements</a>
+</p>
+
+<p align="center">
+  <a href="https://discord.gg/7qK8sfEq2q">
+    <img src="https://img.shields.io/discord/1068543728274382868?color=7289da&label=Support&logo=discord&logoColor=7289da&style=for-the-badge" alt="Discord">
+  </a>
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/github/languages/top/ovosimpatico/radio.garden-to-m3u?logo=python&logoColor=yellow&style=for-the-badge" alt="Language">
+  </a>
+  <a href="https://github.com/ovosimpatico/radio.garden-to-m3u/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/ovosimpatico/radio.garden-to-m3u?style=for-the-badge" alt="License">
+  </a>
+</p>
+
 
 ## Pre-requisites
 
 - Python
 
-## How to use
+## Installation
 
 1. Clone the repository
 
