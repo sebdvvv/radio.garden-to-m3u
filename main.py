@@ -54,7 +54,7 @@ def get_stream_url(station_id):
 
 
 def m3u(stations):
-    f = open('d:/radio.m3u','a', encoding='utf-8')  
+    f = open('radio.m3u','a', encoding='utf-8')  
 
     # if the file is empty, write the header
     if os.path.getsize("radio.m3u") == 0:
@@ -68,7 +68,7 @@ def m3u(stations):
     f.close()
 
 def main():
-    open('d:/radio.m3u', 'w').close()
+    open('radio.m3u', 'w').close()
     if not args.state:
         places = get_places()
         for place in places:
