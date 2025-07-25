@@ -8,6 +8,8 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument('--country', help='Country name', type=str, required=True)
 parser.add_argument('--state', help='State or province name', type=str, required=False)
+parser.add_argument('--onlinestream', help='Only working stream w. response 200.', type=str, required=False)
+
 args = parser.parse_args()
 
 BASE_URL = "https://radio.garden/api"
@@ -27,8 +29,14 @@ def get_places():
 def resolve_final_stream_url(rg_proxy_url):
     try:
         # Make a HEAD request to follow redirects but not download stream content
-        response = requests.get(rg_proxy_url, allow_redirects=True, stream=True, timeout=10)
-        return response.url  # This is the final resolved stream URL
+        response_api = requests.get(rg_proxy_url, allow_redirects=True, stream=True, timeout=10)
+        response_stream = requests.get(response_api.url, stream=True)
+
+        if args.onlinestream  :
+            if response_stream.status_code != 200 :
+                return
+        return response_stream.url  # This is the final resolved stream URL
+
     except Exception as e:
         print(f"[ERROR] Couldn't resolve URL for {rg_proxy_url}: {e}")
         return rg_proxy_url  # fallback to original
@@ -46,7 +54,7 @@ def get_stream_url(station_id):
 
 
 def m3u(stations):
-    f = open('radio.m3u','a', encoding='utf-8')  
+    f = open('d:/radio.m3u','a', encoding='utf-8')  
 
     # if the file is empty, write the header
     if os.path.getsize("radio.m3u") == 0:
@@ -60,7 +68,7 @@ def m3u(stations):
     f.close()
 
 def main():
-    open('radio.m3u', 'w').close()
+    open('d:/radio.m3u', 'w').close()
     if not args.state:
         places = get_places()
         for place in places:
