@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument('--country', help='Country name', type=str, required=True)
 parser.add_argument('--state', help='State or province name', type=str, required=False)
-parser.add_argument('--onlinestream', help='Only working stream w. response 200.', type=str, required=False)
+parser.add_argument('--onlinestream', help='Only include working streams (status 200)', action='store_true')
 
 args = parser.parse_args()
 
