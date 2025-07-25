@@ -10,8 +10,7 @@ parser.add_argument('--country', help='Country name', type=str, required=True)
 parser.add_argument('--state', help='State or province name', type=str, required=False)
 args = parser.parse_args()
 
-
-BASE_URL = "http://radio.garden/api"
+BASE_URL = "https://radio.garden/api"
 
 def get_places():
     
@@ -25,6 +24,14 @@ def get_places():
 
     return sorted(list)
 
+def resolve_final_stream_url(rg_proxy_url):
+    try:
+        # Make a HEAD request to follow redirects but not download stream content
+        response = requests.get(rg_proxy_url, allow_redirects=True, stream=True, timeout=10)
+        return response.url  # This is the final resolved stream URL
+    except Exception as e:
+        print(f"[ERROR] Couldn't resolve URL for {rg_proxy_url}: {e}")
+        return rg_proxy_url  # fallback to original
 def get_stations(place_id):
         list = []
         
@@ -47,9 +54,9 @@ def m3u(stations):
 
     for station in stations:
         station_name = station[0]
-        stream_url = get_stream_url(station[1])
+        resolved_url = resolve_final_stream_url(get_stream_url(station[1]))
         f.write(f'#EXTINF:-1 tvg-name="{station_name}", {station_name}\n')
-        f.write(f'{stream_url}\n')
+        f.write(f'{resolved_url}\n')
     f.close()
 
 def main():
